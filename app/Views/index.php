@@ -6,6 +6,6 @@
     <title>Test page</title>
 </head>
 <body>
-    <h1>Nothing here, just test page!</h1>
+    <h1>Keja keja keja! keja!</h1>
 </body>
 </html>
