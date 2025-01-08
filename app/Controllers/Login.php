@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\AdminModel; 
+
 use CodeIgniter\Controller;
 
 class Login extends BaseController
@@ -13,15 +15,23 @@ class Login extends BaseController
 
     public function authenticate()
     {
+      
         $session = session();
+        $model = new AdminModel();
 
-        // Dummy login check (ganti dengan autentikasi dari database)
+         // Ambil input dari form login
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        if ($username === 'admin' && $password === '12345') {
+        // Cari pengguna berdasarkan username
+        $admin = $model->where('username', $username)->first();
+
+
+        if ($admin && $password === $admin['password']){
             // Set session login
             $session->set('isLoggedIn', true);
+            $session->set('username', $admin['username']);
+
             return redirect()->to('/dashboard');
         } else {
             // Jika login gagal
