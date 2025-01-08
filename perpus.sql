@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2025 at 10:01 AM
+-- Generation Time: Jan 08, 2025 at 10:28 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -76,7 +76,7 @@ CREATE TABLE `transaksi` (
   `kode_buku` varchar(14) NOT NULL,
   `tanggal_pinjam` date NOT NULL,
   `tanggal_kembali` date NOT NULL,
-  `tanggal_must_kembali` date NOT NULL,
+  `status` date NOT NULL,
   `denda` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
