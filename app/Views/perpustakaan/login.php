@@ -142,7 +142,7 @@
 
             if (usernameInput.value === validUsername && passwordInput.value === validPassword) {
                 // Redirect ke halaman dashboard
-                window.location.href = 'index.html'; // Ganti dengan URL dashboard Anda
+                window.location.href = 'index'; // Ganti dengan URL dashboard Anda
             } else {
                 loginError.textContent = 'Username atau password salah';
             }
