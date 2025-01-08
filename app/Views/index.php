@@ -6,6 +6,6 @@
     <title>Test page</title>
 </head>
 <body>
-    <h1>test</h1>
+    <h1>WELCOME TO CODEIGINITER, PLEASE TYPE YOUR CONTROLLER URL</h1>
 </body>
 </html>
