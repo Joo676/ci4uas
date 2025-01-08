@@ -2,7 +2,7 @@ kerja kebut 3 hari
 
 [![Thumbnail](https://files.catbox.moe/dg6u04.jpeg)](https://www.youtube.com/watch?v=TQQJD7D6PIU)
 
-@hz-star @Yesman-Noman bisa bikinkan lah dlu file viewnya? nanti ikuti dari awal punya bapak ja buat acuannya
-hrusnya bisa ja lah kalian, ya lo?
+@hz-star@Yesman-Noman
+kalian bikin sebagian viewnya sama sesuai role kalian bikin controller
 
 
