@@ -2,30 +2,38 @@
 
 namespace App\Controllers;
 
+use CodeIgniter\Controller;
+
 class Login extends BaseController
 {
     public function index()
     {
-        return view('perpustakaan/login');
+        return view('perpustakaan/login'); // Menampilkan halaman login
     }
 
-    public function auth()
+    public function authenticate()
     {
+        $session = session();
+
+        // Dummy login check (ganti dengan autentikasi dari database)
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        // Contoh validasi login sederhana
-        if ($username === 'admin' && $password === 'password') {
-            session()->set('isLoggedIn', true);
-            return redirect()->to('/perpustakaan');
+        if ($username === 'admin' && $password === '12345') {
+            // Set session login
+            $session->set('isLoggedIn', true);
+            return redirect()->to('/dashboard');
+        } else {
+            // Jika login gagal
+            return redirect()->back()->with('error', 'Username atau password salah');
         }
-
-        return redirect()->back()->with('error', 'Login gagal!');
     }
 
     public function logout()
     {
-        session()->destroy();
+        $session = session();
+        $session->destroy(); // Menghapus semua data session
         return redirect()->to('/login');
     }
 }
+

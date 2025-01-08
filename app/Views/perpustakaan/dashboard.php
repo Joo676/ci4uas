@@ -151,7 +151,7 @@
             <div>
                 <small class="text-muted">LANJUTAN</small>
                 <nav class="nav flex-column">
-                    <a class="nav-link" href="#"><i class="fas fa-sign-out-alt me-2"></i> Keluar</a>
+                    <a class="nav-link" href="logout"><i class="fas fa-sign-out-alt me-2"></i> Keluar</a>
                 </nav>
             </div>
         </div>

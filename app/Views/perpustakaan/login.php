@@ -92,7 +92,7 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form id="loginForm">
+        <form id="loginForm" action="/login" method="post">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
@@ -140,14 +140,17 @@
             const validUsername = 'admin';
             const validPassword = '12345';
 
-            if (usernameInput.value === validUsername && passwordInput.value === validPassword) {
-                // Redirect ke halaman dashboard
-                window.location.href = 'index'; // Ganti dengan URL dashboard Anda
-            } else {
-                loginError.textContent = 'Username atau password salah';
-            }
-        }
+        //     if (usernameInput.value === validUsername && passwordInput.value === validPassword) {
+        //         // Redirect ke halaman dashboard
+        //         window.location.href = '/dashboard'; // Ganti dengan URL dashboard Anda
+        //     } else {
+        //         loginError.textContent = 'Username atau password salah';
+        //     }
+        // }
     });
-</script>
+
+
 </body>
 </html>
+
+
