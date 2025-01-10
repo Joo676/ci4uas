@@ -121,7 +121,7 @@
         <nav class="main-header navbar navbar-expand navbar-white navbar-light"></nav>
         <div class="p-3">
             <div class="d-flex align-items-center mb-4">
-                <img src="STMIK PLK.jpg" alt="stmik" class="rounded-circle me-2">
+                <!-- <img src="STMIK PLK.jpg" alt="stmik" class="rounded-circle me-2"> -->
                 <div>
                     <h6 class="mb-0">Admin</h6>
                 </div>
@@ -144,9 +144,9 @@
                                 <i class="fas fa-users me-2"></i> Data Anggota
                             </a>
 
-                            <a class="dropdown-item" href="#"><i class="fas fa-user-tie me-2"></i> Data Admin</a>
+                            <!-- <a class="dropdown-item" href="#"><i class="fas fa-user-tie me-2"></i> Data Admin</a>
                             <a class="dropdown-item" href="#"><i class="fas fa-building me-2"></i> Data Penerbit</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-tags me-2"></i> Data Kategori</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-tags me-2"></i> Data Kategori</a> -->
                         </div>
                     </div>
                     <!-- Katalog Buku Dropdown -->
@@ -155,9 +155,12 @@
                     </a>
                     <div class="collapse" id="katalogBukuCollapse">
                         <div class="nav flex-column">
-                            <a class="dropdown-item" href="#"><i class="fas fa-book me-2"></i> Data Buku</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-exchange-alt me-2"></i> Transaksi</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-history me-2"></i> Riwayat Transaksi</a>
+                        <a class="dropdown-item <?= ($activeMenu == 'buku') ? 'active' : '' ?>" href="/dashboard/buku">
+                                <i class="fas fa-book me-2"></i> Data Buku</a>
+                            </a>
+
+                            <!-- <a class="dropdown-item" href="#"><i class="fas fa-exchange-alt me-2"></i> Transaksi</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-history me-2"></i> Riwayat Transaksi</a> -->
                         </div>
                     </div>
                 </nav>
@@ -165,7 +168,7 @@
             <div>
                 <small class="text-muted">LANJUTAN</small>
                 <nav class="nav flex-column">
-                    <a class="nav-link" href="logout"><i class="fas fa-sign-out-alt me-2"></i> Keluar</a>
+                    <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt me-2"></i> Keluar</a>
                 </nav>
             </div>
         </div>

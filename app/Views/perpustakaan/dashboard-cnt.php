@@ -20,7 +20,7 @@
                             <h1 class="mb-1"><?= $stats['buku'] ?></h1>
                             <p class="mb-0">Buku</p>
                             <i class="fas fa-book stat-icon"></i>
-                            <a href="#" class="more-info text-white text-decoration-none">
+                            <a href="dashboard/buku" class="more-info text-white text-decoration-none">
                                 More info <i class="fas fa-arrow-circle-right"></i>
                             </a>
                         </div>

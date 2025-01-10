@@ -2,7 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\AnggotaModel; 
+use App\Models\AnggotaModel;
+use App\Models\BukuModel; 
 
 class Perpustakaan extends BaseController
 {
@@ -18,6 +19,7 @@ class Perpustakaan extends BaseController
         }
 
         $this->AnggotaModel = new AnggotaModel();
+        $this->BukuModel = new BukuModel();
     }
 
     public function dashboard()
@@ -25,16 +27,18 @@ class Perpustakaan extends BaseController
         
           // Load model
           $anggotaModel = new AnggotaModel();
+          $bukuModel = new BukuModel();
 
           // Ambil jumlah total anggota
           $totalAnggota = $anggotaModel->countAllResults();
+          $totalBuku = $bukuModel->countAllResults();
 
         //dummy stats
         $stats = [
             'anggota' => $totalAnggota,
-            'buku' => 10,
-            'peminjaman' => 3,
-            'pengembalian' => 2,
+            'buku' => $totalBuku,
+            'peminjaman' => 'N/A',
+            'pengembalian' => 'N/A',
         ];      
 
         $data = [
@@ -226,4 +230,206 @@ class Perpustakaan extends BaseController
 
     
     
+
+
+
+
+    public function buku()
+    {
+        // Ambil data buku dari model
+        $buku = $this->BukuModel->findAll();
+        
+        $data = [
+            'activeMenu' => 'buku', // Menandai menu aktif
+            'buku' => $buku,
+            'pageTitle' => 'Manajemen Buku',
+            'content' => view('perpustakaan/buku', ['buku' => $buku]), // Memasukkan data buku ke dalam view
+            ];
+        
+        return view('perpustakaan/dashboard', $data); // Menampilkan halaman dashboard
+    }
+    
+
+    public function tambahBukuForm()
+{
+    $data = [
+        'activeMenu' => 'buku',
+        'pageTitle' => 'Tambah Buku',
+        'content' => view('perpustakaan/tambahBuku')
+    ];
+    return view('perpustakaan/dashboard', $data);
+}
+
+
+
+public function tambahBuku()
+{
+
+   
+
+    if (!$this->validate([
+        'kode_buku' => [
+            'rules' => 'required|is_unique[buku.kode_buku]',
+            'errors' => [
+                'required' => 'Kode buku harus diisi.',
+                'is_unique' => 'Kode buku sudah digunakan.'
+            ]
+        ],
+        'judul' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Judul buku harus diisi.'
+                // 'min_length' => 'Judul buku harus memiliki minimal 3 karakter.'
+            ]
+        ],
+        'penulis' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Penulis harus diisi.'
+            ]
+        ],
+        'penerbit' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Penerbit harus diisi.'
+            ]
+        ],
+        'tahun_terbit' => [
+            'rules' => 'required|numeric|exact_length[4]',
+            'errors' => [
+                'required' => 'Tahun terbit harus diisi.',
+                'numeric' => 'Tahun terbit harus berupa angka.',
+                'exact_length' => 'Tahun terbit harus terdiri dari 4 digit.'
+            ]
+        ],
+        'jumlah_eksemplar' => [
+            'rules' => 'required|numeric',
+            'errors' => [
+                'required' => 'Jumlah eksemplar harus diisi.',
+                'numeric' => 'Jumlah eksemplar harus berupa angka.'
+            ]
+        ],
+    ])) {
+    // Jika validasi gagal
+    session()->setFlashdata('error', $this->validator->listErrors());
+    return redirect()->back()->withInput();
+}
+
+// var_dump($this->request->getPost()); // Data yang sudah divalidasi
+// exit;
+
+
+// Jika validasi berhasil
+$this->BukuModel->insert([
+    'kode_buku' => $this->request->getVar('kode_buku'),
+    'judul' => $this->request->getVar('judul'),
+    'penulis' => $this->request->getVar('penulis'),
+    'penerbit' => $this->request->getVar('penerbit'),
+    'tahun_terbit' => $this->request->getVar('tahun_terbit'),
+    'jumlah_eksemplar' => $this->request->getVar('jumlah_eksemplar')
+]);
+
+session()->setFlashdata('success', 'Buku berhasil ditambahkan.');
+return redirect()->to('/dashboard/buku');
+}
+
+public function editBuku($kode_buku)
+{
+    $buku = $this->BukuModel->find($kode_buku); // Ambil data buku berdasarkan kode_buku
+    
+    if (!$buku) {
+        throw new \CodeIgniter\Exceptions\PageNotFoundException('Buku tidak ditemukan.');
+    }
+
+    $data = [
+        'activeMenu' => 'buku', // Menandai menu aktif
+        'pageTitle' => 'Edit Buku',
+        'buku' => $buku, // Data buku yang akan diedit
+        'content' => view('perpustakaan/tambahBuku', ['buku' => $buku, 'editMode' => true]),
+    ];
+
+    return view('perpustakaan/dashboard', $data);
+}
+
+public function updateBuku($kode_buku)
+{
+    // Validasi input
+    if (!$this->validate([
+        'kode_buku' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Kode buku harus diisi.'
+            ]
+        ],
+        'judul' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Judul buku harus diisi.',
+                // 'min_length' => 'Judul buku harus memiliki minimal 3 karakter.'
+            ]
+        ],
+        'penulis' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Penulis harus diisi.'
+            ]
+        ],
+        'penerbit' => [
+            'rules' => 'required',
+            'errors' => [
+                'required' => 'Penerbit harus diisi.'
+            ]
+        ],
+        'tahun_terbit' => [
+            'rules' => 'required|numeric|exact_length[4]',
+            'errors' => [
+                'required' => 'Tahun terbit harus diisi.',
+                'numeric' => 'Tahun terbit harus berupa angka.',
+                'exact_length' => 'Tahun terbit harus terdiri dari 4 digit.'
+            ]
+        ],
+        'jumlah_eksemplar' => [
+            'rules' => 'required|numeric',
+            'errors' => [
+                'required' => 'Jumlah eksemplar harus diisi.',
+                'numeric' => 'Jumlah eksemplar harus berupa angka.'
+            ]
+        ],
+    ])) {
+        // Jika validasi gagal
+        session()->setFlashdata('error', $this->validator->listErrors());
+        return redirect()->back()->withInput();
+    }
+
+    // Update data buku
+    $this->BukuModel->update($kode_buku, [
+        'kode_buku' => $this->request->getVar('kode_buku'),
+        'judul' => $this->request->getVar('judul'),
+        'penulis' => $this->request->getVar('penulis'),
+        'penerbit' => $this->request->getVar('penerbit'),
+        'tahun_terbit' => $this->request->getVar('tahun_terbit'),
+        'jumlah_eksemplar' => $this->request->getVar('jumlah_eksemplar')
+    ]);
+
+    session()->setFlashdata('success', 'Data buku berhasil diperbarui.');
+    return redirect()->to('/dashboard/buku');
+}
+
+public function hapusBuku($kode_buku)
+{
+    // Mencari data buku berdasarkan kode_buku
+    $buku = $this->BukuModel->find($kode_buku);
+
+    if (!$buku) {
+        throw new \CodeIgniter\Exceptions\PageNotFoundException('Buku tidak ditemukan.');
+    }
+
+    // Menghapus data buku dari database
+    $this->BukuModel->delete($kode_buku);
+
+    session()->setFlashdata('success', 'Buku berhasil dihapus.');
+    return redirect()->to('/dashboard/buku');
+}
+
+
 }
