@@ -135,10 +135,10 @@
             isValid = false;
         }
 
-        if (isValid) {
-            // Dummy login check (ganti dengan autentikasi backend jika diperlukan)
-            const validUsername = 'admin';
-            const validPassword = '12345';
+        // if (isValid) {
+        //     // Dummy login check (ganti dengan autentikasi backend jika diperlukan)
+        //     const validUsername = 'admin';
+        //     const validPassword = '12345';
 
         //     if (usernameInput.value === validUsername && passwordInput.value === validPassword) {
         //         // Redirect ke halaman dashboard

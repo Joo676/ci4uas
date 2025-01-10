@@ -35,7 +35,9 @@ abstract class BaseController extends Controller
      *
      * @var list<string>
      */
-    protected $helpers = [];
+    protected $helpers = ['text'];
+
+
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -51,8 +53,12 @@ abstract class BaseController extends Controller
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
+        setlocale(LC_TIME, 'id_ID.UTF-8', 'id_ID', 'id');
+
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
     }
+
+    
 }
