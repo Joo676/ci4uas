@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2025 at 01:25 PM
+-- Generation Time: Jan 10, 2025 at 04:44 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `username`, `password`) VALUES
-('19821AX', 'joo', '123');
+('19821AX', 'joo', '123'),
+('OPO90', 'admin', '12345');
 
 -- --------------------------------------------------------
 
@@ -63,9 +64,7 @@ CREATE TABLE `anggota` (
 --
 
 INSERT INTO `anggota` (`id_anggota`, `nama`, `alamat`, `nomor_telepon`, `email`, `created_at`, `updated_at`) VALUES
-('OLKIRVQX', 'aba', 'jl. ala', '08323145', 'ga@ga.com', '2025-01-10 08:07:13', '2025-01-10 12:14:28'),
-('WXMULGWQ', 'era', 'jl.  op', '0918283', 'alo@eru.com', '2025-01-10 08:07:40', '2025-01-10 08:07:40'),
-('ZVVAWDB8', 'aqa', 'fga', '12321441', 'wer@qer.com', '2025-01-10 10:57:01', '2025-01-10 10:57:01');
+('GHOEWYUO', 'Akima', 'Jl. Makras', '09812347665', 'Akima@ace32.com', '2025-01-10 15:41:15', '2025-01-10 15:41:15');
 
 -- --------------------------------------------------------
 
@@ -81,6 +80,13 @@ CREATE TABLE `buku` (
   `tahun_terbit` year(4) NOT NULL,
   `jumlah_eksemplar` int(14) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `buku`
+--
+
+INSERT INTO `buku` (`kode_buku`, `judul`, `penulis`, `penerbit`, `tahun_terbit`, `jumlah_eksemplar`) VALUES
+('9OEK91', 'No regret', 'Purnari Ambalana', 'PT. JKM', '2020', 14);
 
 -- --------------------------------------------------------
 
